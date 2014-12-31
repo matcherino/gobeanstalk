@@ -102,6 +102,11 @@ func (c *Conn) Watch(tubename string) (int, error) {
 	return tubeCount, nil
 }
 
+// Return the address of a pool
+func (c *Conn) GetAddr() string {
+	return c.addr
+}
+
 /*
 Ignore tube.
 
