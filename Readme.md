@@ -80,7 +80,7 @@ func main(){
 	}
 	
 	// Use the connection as you would a normal connection, if you use multiple tubes
-	// always call Use on your connection, as a reused pool connection does not reset the tube
+	// always call Use on your connection, as a reused connection does not reset the tubei.
 	err = conn.Use(testtube)
 	if err != nil {
 		log.Fatal(err)
@@ -89,8 +89,8 @@ func main(){
 
 		// Release the connection back into the pool, keep in mind that this connection 
 		// is still using the "default" tube we specified from Use command.
-		// If a connection is bad, do not replace it to the pool, simply derefrence it,
-		// the pool will aquire a healthy connection in it's place on-demand
+		// If a connection is bad, do not release it to the pool, simply derefrence it.
+		// The pool will aquire a healthy connection in its place on-demand.
 		p.Release(conn)
 	}
 
