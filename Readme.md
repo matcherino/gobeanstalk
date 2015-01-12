@@ -58,6 +58,48 @@ func main() {
 }
 ```
 
+
+### Connection pool
+```go
+import (
+	"github.com/iwanbk/gobeanstalk"
+	"log"
+)
+
+func main(){
+        // Start a new connection pool (connection string, pool size)
+        p, err := gobeanstalk.NewPool("localhost:11300", 10)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Retrive a pool member
+	conn, err := p.Get()
+	if err != nil {
+		log.Fatal(err)
+	}
+	
+        // Use the connection as you would a normal connection, if you use multiple tubes
+        // always call Use on your connection, as a reused pool connection does not reset the tube
+        err = conn.Use(testtube)
+	if err != nil {
+		log.Fatal(err)
+                conn = nil
+	}else{
+
+            // Release the connection back into the pool, keep in mind that this connection 
+            // is still using the "default" tube we specified from Use command.
+            // If a connection is bad, do not replace it to the pool, simply derefrence it,
+            // the pool will aquire a healthy connection in it's place on-demand
+	    p.Release(conn)
+        }
+
+        // Empty the pool, this will close all pooled connections and destroy the pool
+	p.Empty()
+}
+```
+
+
 ## Implemented Commands
 
 Producer commands:

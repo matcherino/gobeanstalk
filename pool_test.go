@@ -24,7 +24,7 @@ func TestNewPool(t *testing.T) {
 	assertPoolLength(t, "NewPool", len(p.pool), 10)
 
 	// Test getting and using a pool member
-	conn, err := p.Get(testtube)
+	conn, err := p.Get()
 	if err != nil {
 		t.Fatal("Pool.Get failed.Err = ", err.Error())
 	}

@@ -33,7 +33,7 @@ func NewPool(addr string, size int) (*Pool, error) {
 }
 
 // Retrieves an available beanstalk client. If there are none available it will create a new beanstalk connection
-func (p *Pool) Get(tube string) (*Conn, error) {
+func (p *Pool) Get() (*Conn, error) {
 	select {
 	case conn := <-p.pool:
 		return conn, nil
