@@ -79,9 +79,9 @@ func main(){
 		log.Fatal(err)
 	}
 	
-        // Use the connection as you would a normal connection, if you use multiple tubes
-        // always call Use on your connection, as a reused pool connection does not reset the tube
-        err = conn.Use(testtube)
+	// Use the connection as you would a normal connection, if you use multiple tubes
+	// always call Use on your connection, as a reused pool connection does not reset the tube
+	err = conn.Use(testtube)
 	if err != nil {
 		log.Fatal(err)
 		conn = nil
