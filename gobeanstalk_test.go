@@ -9,10 +9,11 @@ import (
 const (
 	testtube = "testtube"
 	testjob  = "testjob"
+	address  = "localhost:11300"
 )
 
 func dial(t *testing.T) *Conn {
-	conn, err := Dial("localhost:11300")
+	conn, err := Dial(address)
 	if err != nil {
 		t.Fatal("Dial failed.err = :", err.Error())
 	}
@@ -20,7 +21,7 @@ func dial(t *testing.T) *Conn {
 }
 
 func TestDial(t *testing.T) {
-	if _, err := Dial("localhost:11300"); err != nil {
+	if _, err := Dial(address); err != nil {
 		t.Fatal("Dial failed.err = :", err.Error())
 	}
 }
